@@ -113,9 +113,7 @@ void Clipping::drawClippedLine_CohenSuth(Point start, Point end, vector<Point> c
             y1 = yi;
 
             out1 = GetOutCode(x1, y1, clippingWindow);
-        }
-
-        else {
+        } else {
             if (out2.left)
                 X_Intersect(x1, y1, x2, y2, clippingWindow[0].x, &xi, &yi);
             else if (out2.top)
@@ -137,5 +135,12 @@ void Clipping::drawClippedLine_CohenSuth(Point start, Point end, vector<Point> c
     }
 }
 
+void Clipping::draw(Point start, Point end, vector<Point> clippingWindow) {
+
+    if (ID == CLIP_CIRCLE_TO_RECTANGLE)
+        drawClippedCircle(start, end, clippingWindow);
+    else
+        drawClippedLine_CohenSuth(start, end, clippingWindow);
+}
 
 
