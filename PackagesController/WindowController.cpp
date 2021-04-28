@@ -85,6 +85,7 @@ void WindowController::receivePointForFilling(Point point, int option, bool flag
     }
 }
 
+
 void WindowController::receivePointForClipping(Point point, vector<Point> clipppingWindow) {
 
     if (clickedPoints.size() == 0) {
@@ -111,6 +112,45 @@ void WindowController::receivePointForClipping(Point point, vector<Point> clippp
     }
 }
 
+
+void WindowController::savingData(string name) {
+
+    ofstream MyWriteFile(name);
+
+    for (int i = 0; i < savedData.size(); i++) {
+        MyWriteFile << savedData[i].ID << "-" << savedData[i].color << "-";
+
+        if (savedData[i].ID == CIRCLE_FILLING) {
+            MyWriteFile << savedData[i].option << "-";
+        }
+
+        for (int j = 0; j < savedData[i].points.size(); j++) {
+            MyWriteFile << savedData[i].points[j].x << "-" << savedData[i].points[j].y;
+            if (j != savedData[i].points.size() - 1) MyWriteFile << "-";
+            else MyWriteFile << "\n";
+        }
+    }
+    MyWriteFile.close();
+}
+
+void WindowController::savingDataHelper() {
+    //to choose the path you want
+    OPENFILENAME ofn;
+    char szFileName[MAX_PATH] = "";
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+    ofn.lpstrFile = szFileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = "txt";
+
+    GetSaveFileName(&ofn);
+
+    string file_name = ofn.lpstrFile;
+    savingData(file_name);
+}
 
 bool WindowController::isCurrentlyLine() {
     return (ID >= 1 && ID <= 3);
