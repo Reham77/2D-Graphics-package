@@ -19,3 +19,20 @@ void CircleFilling::fillingFirstQuarter(Point center, Point point) {
         line.parametricLine(center, Point(center.x + y, center.y - x));
     }
 }
+
+void CircleFilling::fillingSecondQuarter(Point center, Point point) {
+
+    int radius = circle.getRadius(center, point);
+    int x = radius;
+    int y = 0;
+    circle.drawEightPoints(center, Point(x, y));
+
+    while (y < x) {
+        y++;
+        x = Round(sqrt(radius * radius - y * y));
+        circle.drawEightPoints(center, Point(x, y));
+        line.parametricLine(center, Point(center.x - x, center.y - y));
+        line.parametricLine(center, Point(center.x - y, center.y - x));
+    }
+}
+
