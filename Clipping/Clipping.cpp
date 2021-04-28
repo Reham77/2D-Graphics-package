@@ -77,6 +77,7 @@ OutCode Clipping::GetOutCode(double x, double y, vector<Point> clippingWindow) {
     return out;
 
 }
+
 void Clipping::X_Intersect(double Xstart, double Ystart, double Xend, double Yend, int x, double *xi, double *yi) {
     *xi = x;
     *yi = Ystart + (x - Xstart) * (Yend - Ystart) / (Xend - Xstart);
@@ -86,3 +87,55 @@ void Clipping::Y_Intersect(double Xstart, double Ystart, double Xend, double Yen
     *yi = y;
     *xi = Xstart + (y - Ystart) * (Xend - Xstart) / (Yend - Ystart);
 }
+
+
+void Clipping::drawClippedLine_CohenSuth(Point start, Point end, vector<Point> clippingWindow) {
+
+    double x1 = start.x, y1 = start.y, x2 = end.x, y2 = end.y;
+    OutCode out1 = GetOutCode(x1, y1, clippingWindow);
+    OutCode out2 = GetOutCode(x2, y2, clippingWindow);
+
+    while ((out1.All || out2.All) && !(out1.All & out2.All)) {
+        double xi, yi;
+
+        //if out1 is not equal zero then check the intersection
+        if (out1.All) {
+            if (out1.left)
+                X_Intersect(x1, y1, x2, y2, clippingWindow[0].x, &xi, &yi);
+            else if (out1.top)
+                Y_Intersect(x1, y1, x2, y2, clippingWindow[0].y, &xi, &yi);
+            else if (out1.right)
+                X_Intersect(x1, y1, x2, y2, clippingWindow[1].x, &xi, &yi);
+            else
+                Y_Intersect(x1, y1, x2, y2, clippingWindow[1].y, &xi, &yi);
+
+            x1 = xi;
+            y1 = yi;
+
+            out1 = GetOutCode(x1, y1, clippingWindow);
+        }
+
+        else {
+            if (out2.left)
+                X_Intersect(x1, y1, x2, y2, clippingWindow[0].x, &xi, &yi);
+            else if (out2.top)
+                Y_Intersect(x1, y1, x2, y2, clippingWindow[0].y, &xi, &yi);
+            else if (out2.right)
+                X_Intersect(x1, y1, x2, y2, clippingWindow[1].x, &xi, &yi);
+            else
+                Y_Intersect(x1, y1, x2, y2, clippingWindow[1].y, &xi, &yi);
+
+
+            x2 = xi;
+            y2 = yi;
+            out2 = GetOutCode(x2, y2, clippingWindow);
+        }
+    }
+    if (!out1.All && !out2.All) {
+        MoveToEx(hdc, Round(x1), Round(y1), NULL);
+        LineTo(hdc, Round(x2), Round(y2));
+    }
+}
+
+
+
