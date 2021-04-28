@@ -31,6 +31,5 @@
 - [x] Change colors 
 - [x] Clear the entire screen    
 
-#### Screenshots ####
-
-![Alt text](https://giphy.com/gifs/KqAdDXphDTZqoq9eKj)
+### Screenshots ###
+![Alt text](https://media.giphy.com/media/KqAdDXphDTZqoq9eKj/giphy.gif) 
