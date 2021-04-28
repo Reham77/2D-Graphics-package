@@ -9,7 +9,6 @@ int Circle::getRadius(Point center, Point point) {
 }
 
 void Circle::drawEightPoints(Point center, Point point) {
-
     SetPixel(hdc, center.x + point.x, center.y + point.y, color);
     SetPixel(hdc, center.x - point.x, center.y + point.y, color);
     SetPixel(hdc, center.x - point.x, center.y - point.y, color);
@@ -77,4 +76,37 @@ void Circle::midpoint(Point center, Point point) {
         drawEightPoints(center, Point(x, y));
     }
 }
+void Circle::modifiedMidpoint(Point center, Point point) {
+    int radius = getRadius(center, point);
+    int x = radius;
+    int y = 0;
+    drawEightPoints(center, Point(x, y));
+    int d = 1 - radius;
+    int change1 = 5 - 2 * radius;
+    int change2 = 3;
+    while (y < x) {
+        if (d >= 0) {
+            d += change1;
+            change1 += 4;
+            x--;
+        } else {
+            d += change2;
+            change1 += 2;
+        }
+        change2 += 2;
+        y++;
+        drawEightPoints(center, Point(x, y));
+    }
+}
 
+void Circle::draw(Point center, Point point) {
+    if (ID == CIRCLE_DIRECT_CARTESIAN) {
+        DirectCartesian(center, point);
+    } else if (ID == CIRCLE_POLAR) {
+        Polar(center, point);
+    } else if (ID == CIRCLE_IMPROVED_POLAR) {
+        IterativePolar(center, point);
+    } else if (ID == CIRCLE_BRESENHAM) {
+        midpoint(center, point);
+    } else modifiedMidpoint(center, point);
+}
