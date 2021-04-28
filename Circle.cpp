@@ -43,3 +43,20 @@ void Circle::Polar(Point center, Point point) {
         drawEightPoints(center, Point(x, y));
     }
 }
+
+void Circle::IterativePolar(Point center, Point point) {
+    int radius = getRadius(center, point);
+    double dtheta = 1.0 / radius;
+    double ctheta = cos(dtheta);
+    double stheta = sin(dtheta);
+    double x = radius;
+    double y = 0.0;
+    SetPixel(hdc, x, y, color);
+    for (double theta = 0; theta <= 6.28; theta += dtheta) {
+        double x1 = x * ctheta - y * stheta;
+        y = x * stheta + y * ctheta;
+        x = x1;
+        SetPixel(hdc, Round(x + center.x), Round(y + center.y), color);
+    }
+}
+
