@@ -25,8 +25,7 @@ void Line::DDA(Point startPoint, Point endPoint) {
     double dx = endPoint.x - startPoint.x;
     double dy = endPoint.y - startPoint.y;
     double m = 0;
-    if (abs(dy) <= abs(dx)) // if slope is less than or equal to one
-    {
+    if (abs(dy) <= abs(dx)) {
         m = dy / dx;
         if (startPoint.x > endPoint.x) {
             swap(startPoint.x, endPoint.x);
@@ -65,9 +64,9 @@ void Line::midpoint(Point startPoint, Point endPoint) {
             swap(startPoint.x, endPoint.x);
             swap(startPoint.y, endPoint.y);
         }
-        double d = (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y); // desicion variable
-        double change1 = 2 * (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y); // under the line
-        double change2 = -2 * (endPoint.y - startPoint.y); //above the line
+        double d = (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y);
+        double change1 = 2 * (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y);
+        double change2 = -2 * (endPoint.y - startPoint.y);
         int x = startPoint.x;
         int y = startPoint.y;
         SetPixel(hdc, x, y, color);
@@ -143,7 +142,6 @@ void Line::midpoint(Point startPoint, Point endPoint) {
             }
             y++;
             SetPixel(hdc, x, y, color);
-
         }
     }
 
@@ -156,5 +154,3 @@ void Line::draw(Point start, Point end) {
         parametricLine(start, end);
     } else midpoint(start, end);
 }
-
-
