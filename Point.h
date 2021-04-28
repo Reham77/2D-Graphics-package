@@ -1,0 +1,44 @@
+#ifndef UNTITLED51_POINT_H
+#define UNTITLED51_POINT_H
+enum Option {
+
+    COLORING,
+
+    LINE_DDA,
+    LINE_PARAMETRIC,
+    LINE_BRESENHAM,
+
+    CIRCLE_DIRECT_CARTESIAN,
+    CIRCLE_POLAR,
+    CIRCLE_IMPROVED_POLAR,
+    CIRCLE_BRESENHAM,
+    CIRCLE_MODFIED_BRESENHAM,
+
+    CIRCLE_FILLING,
+
+    ELLIPSE_POLLAR,
+    ELLIPSE_ITERATIVE_POLLAR,
+    ELLIPSE_DIRECT,
+
+    USE_CLIPPING_WINDOW,
+    CLIP_LINE_TO_RECTANGLE,
+    CLIP_CIRCLE_TO_RECTANGLE,
+
+    SAVE,
+    LOAD,
+    CLEAR,
+    QUIT
+
+};
+
+class Point {
+public:
+    int x, y;
+
+    Point();
+
+    Point(int x, int y);
+};
+
+#endif //UNTITLED51_POINT_H
+
