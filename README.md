@@ -7,28 +7,28 @@
     - [Parametric Line Equation](https://en.wikipedia.org/wiki/Parametric_equation)
     - [Bresenham's mid-point algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) <br/>
     
--[x] Draw circles
+- [x] Draw circles
     - [cartesian equation](https://en.wikipedia.org/wiki/Circle#Cartesian_coordinates)
     - [Polar Equation](https://en.wikipedia.org/wiki/Circle#Polar_coordinates)
     - Iterative polar <br/>
     - [Bresenham's mid-point algorithm](https://en.wikipedia.org/wiki/Midpoint_circle_algorithm)
     - Modified Bresenham's mid-point algorithm  <br/>
     
--[x] Draw ellipse
+- [x] Draw ellipse
     - [cartesian equation](https://en.wikipedia.org/wiki/Ellipse#Standard_equation)
     - [Polar Equation](https://en.wikipedia.org/wiki/Ellipse#Polar_forms)
     - Iterative polar <br/>
     
--[x] Fill a circle
+- [x] Fill a circle
   - Choose which quarter to fill  <br/>
   
--[x] clip a shape to a rectangular window
+- [x] clip a shape to a rectangular window
   - draw clipped circle
   - draw clipped line using [Cohen sutherland algorithm](https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm)
   
--[x] Save data <br/>
--[x] Load data <br/>
--[x] Change colors <br/>
--[x] Clear the entire screen   <br/>  
+- [x] Save data <br/>
+- [x] Load data <br/>
+- [x] Change colors <br/>
+- [x] Clear the entire screen   <br/>  
 
 
