@@ -55,9 +55,8 @@ void ellipse::direct(Point center, Point a, Point b) {
     }
 }
 
-//don't calculate sin and cos inside loop
+//enhanced polar algorithm that doesn't calculate sin and cos inside loop
 void ellipse::iterativePolar(Point center, Point a, Point b) {
-
     int RadiusA = getRadius(center, a);
     int RadiusB = getRadius(center, b);
 
