@@ -17,7 +17,7 @@ public:
 
     Line(HDC hdc, int ID, COLORREF color);
 
-    void parametricLine(Point startPoint, Point endPoint);
+    void parametricEquationLine(Point startPoint, Point endPoint);
 
     void draw(Point start, Point end);
 

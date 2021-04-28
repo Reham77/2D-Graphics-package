@@ -17,10 +17,10 @@ vector<Point> Clipping::drawClippingWindow(Point topLeft, Point bottomRight) {
     clippingWindowPoints.push_back(bottomRight);
 
     //draw the rectangle
-    linedrawer->parametricLine(topLeft, Point(bottomRight.x, topLeft.y));
-    linedrawer->parametricLine(Point(topLeft.x, bottomRight.y), bottomRight);
-    linedrawer->parametricLine(topLeft, Point(topLeft.x, bottomRight.y));
-    linedrawer->parametricLine(Point(bottomRight.x, topLeft.y), bottomRight);
+    linedrawer->parametricEquationLine(topLeft, Point(bottomRight.x, topLeft.y));
+    linedrawer->parametricEquationLine(Point(topLeft.x, bottomRight.y), bottomRight);
+    linedrawer->parametricEquationLine(topLeft, Point(topLeft.x, bottomRight.y));
+    linedrawer->parametricEquationLine(Point(bottomRight.x, topLeft.y), bottomRight);
 
     return clippingWindowPoints;
 }
@@ -61,6 +61,7 @@ void Clipping::drawClippedCircle(Point center, Point point, vector<Point> clippi
     }
 }
 
+
 OutCode Clipping::GetOutCode(double x, double y, vector<Point> clippingWindow) {
     OutCode out;
     out.All = 0;
@@ -75,4 +76,14 @@ OutCode Clipping::GetOutCode(double x, double y, vector<Point> clippingWindow) {
         out.bottom = 1;
     return out;
 
+}
+
+void Clipping::X_Intersect(double Xstart, double Ystart, double Xend, double Yend, int x, double *xi, double *yi) {
+    *xi = x;
+    *yi = Ystart + (x - Xstart) * (Yend - Ystart) / (Xend - Xstart);
+}
+
+void Clipping::Y_Intersect(double Xstart, double Ystart, double Xend, double Yend, int y, double *xi, double *yi) {
+    *yi = y;
+    *xi = Xstart + (y - Ystart) * (Xend - Xstart) / (Yend - Ystart);
 }

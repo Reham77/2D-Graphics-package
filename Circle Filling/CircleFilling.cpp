@@ -15,8 +15,8 @@ void CircleFilling::fillingFirstQuarter(Point center, Point point) {
         y++;
         x = Round(sqrt(radius * radius - y * y));
         circle.drawEightPoints(center, Point(x, y));
-        line.parametricLine(center, Point(center.x + x, center.y - y));
-        line.parametricLine(center, Point(center.x + y, center.y - x));
+        line.parametricEquationLine(center, Point(center.x + x, center.y - y));
+        line.parametricEquationLine(center, Point(center.x + y, center.y - x));
     }
 }
 
@@ -31,8 +31,8 @@ void CircleFilling::fillingSecondQuarter(Point center, Point point) {
         y++;
         x = Round(sqrt(radius * radius - y * y));
         circle.drawEightPoints(center, Point(x, y));
-        line.parametricLine(center, Point(center.x - x, center.y - y));
-        line.parametricLine(center, Point(center.x - y, center.y - x));
+        line.parametricEquationLine(center, Point(center.x - x, center.y - y));
+        line.parametricEquationLine(center, Point(center.x - y, center.y - x));
     }
 }
 
@@ -46,8 +46,8 @@ void CircleFilling::fillingThirdQuarter(Point center, Point point) {
         y++;
         x = Round(sqrt(radius * radius - y * y));
         circle.drawEightPoints(center, Point(x, y));
-        line.parametricLine(center, Point(center.x - x, center.y + y));
-        line.parametricLine(center, Point(center.x - y, center.y + x));
+        line.parametricEquationLine(center, Point(center.x - x, center.y + y));
+        line.parametricEquationLine(center, Point(center.x - y, center.y + x));
 
     }
 }
@@ -62,8 +62,8 @@ void CircleFilling::fillingForthQuarter(Point center, Point point) {
         y++;
         x = Round(sqrt(radius * radius - y * y));
         circle.drawEightPoints(center, Point(x, y));
-        line.parametricLine(center, Point(center.x + x, center.y + y));
-        line.parametricLine(center, Point(center.x + y, center.y + x));
+        line.parametricEquationLine(center, Point(center.x + x, center.y + y));
+        line.parametricEquationLine(center, Point(center.x + y, center.y + x));
     }
 }
 

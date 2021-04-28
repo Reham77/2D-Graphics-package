@@ -7,7 +7,7 @@ Line::Line(HDC hdc, int ID, COLORREF color) : Shape(hdc, ID, color) {
 }
 
 //using parametric equation
-void Line::parametricLine(Point startPoint, Point endPoint) {
+void Line::parametricEquationLine(Point startPoint, Point endPoint) {
     double dx = (double) endPoint.x - startPoint.x;
     double dy = (double) endPoint.y - startPoint.y;
 
@@ -20,7 +20,6 @@ void Line::parametricLine(Point startPoint, Point endPoint) {
     }
 }
 
-// y = mx + c
 void Line::DDA(Point startPoint, Point endPoint) {
     double dx = endPoint.x - startPoint.x;
     double dy = endPoint.y - startPoint.y;
@@ -151,6 +150,6 @@ void Line::draw(Point start, Point end) {
     if (ID == LINE_DDA) {
         DDA(start, end);
     } else if (ID == LINE_PARAMETRIC) {
-        parametricLine(start, end);
+        parametricEquationLine(start, end);
     } else midpoint(start, end);
 }
