@@ -32,3 +32,23 @@ void WindowController::doubleClick(Point point) {
         receivePointForEllipse(point);
     }
 }
+
+void WindowController::receivePointForFilling(Point point, int option, bool flag) {
+    if (clickedPoints.size() == 0) {
+        clickedPoints.push_back(point);
+    } else {
+        CircleFilling circlefilling = CircleFilling(hdc, ID, color);
+        if (flag) {
+            cout << "ENTER THE QUARTER NUMBER" << endl;
+            cin >> option;
+        }
+        circlefilling.draw(option, clickedPoints[0], point);
+        clickedPoints.push_back(point);
+        savedData.push_back({ID, color, option, clickedPoints});
+        clickedPoints.clear();
+    }
+}
+
+bool WindowController::isCurrentlyLine() {
+    return (ID >= 1 && ID <= 3);
+}
