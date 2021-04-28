@@ -85,6 +85,32 @@ void WindowController::receivePointForFilling(Point point, int option, bool flag
     }
 }
 
+void WindowController::receivePointForClipping(Point point, vector<Point> clipppingWindow) {
+
+    if (clickedPoints.size() == 0) {
+        clickedPoints.push_back(point);
+    } else {
+        Clipping clip = Clipping(hdc, ID, color);
+
+        if (ID == USE_CLIPPING_WINDOW) {
+            clearClippingWindow();//clear old window then create a new one
+            //clipping vector has two points (topleft - buttomright)
+
+            ClippingWindow = clip.drawClippingWindow(clickedPoints[0], point);
+
+            //then set this->clipping window with clipping window
+            SetClippingWindow(ClippingWindow);
+        } else {
+
+            clip.draw(clickedPoints[0], point, ClippingWindow);
+        }
+
+        clickedPoints.push_back(point);
+        savedData.push_back({ID, color, 0, clickedPoints});
+        clickedPoints.clear();
+    }
+}
+
 
 bool WindowController::isCurrentlyLine() {
     return (ID >= 1 && ID <= 3);
