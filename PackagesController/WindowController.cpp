@@ -56,3 +56,15 @@ void WindowController::receivePointForCircle(Point point) {
         clickedPoints.clear();
     }
 }
+
+void WindowController::receivePointForEllipse(Point point) {
+    ellipse ellipseDrawer = ellipse(hdc, ID, color);
+    if (clickedPoints.size() < 2) {
+        clickedPoints.push_back(point);
+    } else {
+        ellipseDrawer.draw(clickedPoints[0], clickedPoints[1], point);
+        clickedPoints.push_back(point);
+        savedData.push_back({ID, color, 0, clickedPoints});
+        clickedPoints.clear();
+    }
+}
