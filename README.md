@@ -31,4 +31,5 @@
 - [x] Change colors 
 - [x] Clear the entire screen    
 
-
+####Screenshots
+![](https://giphy.com/gifs/KqAdDXphDTZqoq9eKj)
