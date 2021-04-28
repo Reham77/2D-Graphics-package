@@ -77,7 +77,6 @@ OutCode Clipping::GetOutCode(double x, double y, vector<Point> clippingWindow) {
     return out;
 
 }
-
 void Clipping::X_Intersect(double Xstart, double Ystart, double Xend, double Yend, int x, double *xi, double *yi) {
     *xi = x;
     *yi = Ystart + (x - Xstart) * (Yend - Ystart) / (Xend - Xstart);
