@@ -44,3 +44,15 @@ void WindowController::receivePointForLine(Point point) {
         clickedPoints.clear();
     }
 }
+
+void WindowController::receivePointForCircle(Point point) {
+    if (clickedPoints.size() == 0) {
+        clickedPoints.push_back(point);
+    } else {
+        Circle circleDrawer = Circle(hdc, ID, color);
+        circleDrawer.draw(clickedPoints[0], point);
+        clickedPoints.push_back(point);
+        savedData.push_back({ID, color, 0, clickedPoints});
+        clickedPoints.clear();
+    }
+}
