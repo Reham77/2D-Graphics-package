@@ -68,3 +68,24 @@ void WindowController::receivePointForEllipse(Point point) {
         clickedPoints.clear();
     }
 }
+
+bool WindowController::isCurrentlyLine() {
+    return (ID >= 1 && ID <= 3);
+}
+
+bool WindowController::isCurrentlyCircle() {
+    return (ID >= 4 && ID <= 8);
+}
+
+bool WindowController::isFilling() {
+    return (ID == CIRCLE_FILLING);
+}
+
+bool WindowController::isClipping() {
+    return (ID >= 13 && ID <= 15);
+}
+
+bool WindowController::isCurrentlyEllipse() {
+    return (ID >= 10 && ID <= 12);
+}
+
