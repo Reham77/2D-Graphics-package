@@ -60,3 +60,21 @@ void Circle::IterativePolar(Point center, Point point) {
     }
 }
 
+void Circle::midpoint(Point center, Point point) {
+    int radius = getRadius(center, point);
+    int x = radius;
+    int y = 0;
+    drawEightPoints(center, Point(x, y));
+    int d = 1 - radius;
+    while (y < x) {
+        if (d >= 0) {
+            d += (2 * (y - x) + 5);
+            x--;
+        } else {
+            d += (2 * y + 3);
+        }
+        y++;
+        drawEightPoints(center, Point(x, y));
+    }
+}
+
