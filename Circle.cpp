@@ -33,3 +33,13 @@ void Circle::DirectCartesian(Point center, Point point) {
     }
 }
 
+// x = RCos(theta)  -   y = Rsin(theta)
+void Circle::Polar(Point center, Point point) {
+    int radius = getRadius(center, point);
+    double dtheta = 1.0 / radius;
+    for (double theta = 0; theta <= 0.785; theta += dtheta) {
+        int x = Round(radius * cos(theta));
+        int y = Round(radius * sin(theta));
+        drawEightPoints(center, Point(x, y));
+    }
+}
