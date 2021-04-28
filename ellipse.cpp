@@ -1,15 +1,15 @@
-#include "Ellipse.h"
+#include "ellipse.h"
 
-Ellipse::Ellipse(HDC hdc, int ID, COLORREF color) :
+ellipse::ellipse(HDC hdc, int ID, COLORREF color) :
         Shape(hdc, ID, color) {
 
 }
 
-int Ellipse::getRadius(Point center, Point point) {
+int ellipse::getRadius(Point center, Point point) {
     return hypot(center.x - point.x, center.y - point.y);
 }
 
-void Ellipse::drawFourPoints(Point center, Point point) {
+void ellipse::drawFourPoints(Point center, Point point) {
 
     SetPixel(hdc, center.x + point.x, center.y + point.y, color);
     SetPixel(hdc, center.x - point.x, center.y + point.y, color);
@@ -18,7 +18,7 @@ void Ellipse::drawFourPoints(Point center, Point point) {
 
 }
 
-void Ellipse::Polar(Point center, Point a, Point b) {
+void ellipse::Polar(Point center, Point a, Point b) {
 
     int RadiusA = getRadius(center, a);
     int RadiusB = getRadius(center, b);
@@ -31,7 +31,7 @@ void Ellipse::Polar(Point center, Point a, Point b) {
     }
 }
 
-void Ellipse::direct(Point center, Point a, Point b) {
+void ellipse::direct(Point center, Point a, Point b) {
 
     int RadiusA = getRadius(center, a);
     int RadiusB = getRadius(center, b);
@@ -56,7 +56,7 @@ void Ellipse::direct(Point center, Point a, Point b) {
 }
 
 //don't calculate sin and cos inside loop
-void Ellipse::iterativePolar(Point center, Point a, Point b) {
+void ellipse::iterativePolar(Point center, Point a, Point b) {
 
     int RadiusA = getRadius(center, a);
     int RadiusB = getRadius(center, b);
@@ -79,7 +79,7 @@ void Ellipse::iterativePolar(Point center, Point a, Point b) {
     }
 }
 
-void Ellipse::draw(Point point, Point a, Point b) {
+void ellipse::draw(Point point, Point a, Point b) {
 
     if (ID == ELLIPSE_POLLAR)
         Polar(point, b, a);

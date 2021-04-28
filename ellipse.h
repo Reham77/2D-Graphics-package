@@ -1,10 +1,10 @@
-#ifndef UNTITLED51_ELIPSE_H
-#define UNTITLED51_ELIPSE_H
+#ifndef UNTITLED51_ELLIPSE_H
+#define UNTITLED51_ELLIPSE_H
 
 
 #include "Shape.h"
 
-class Ellipse : public Shape {
+class ellipse : public Shape {
 
 private:
     int getRadius(Point center , Point point);
@@ -18,7 +18,7 @@ private:
     void direct(Point center, Point a, Point b);
 
 public:
-    Ellipse(HDC hdc, int ID, COLORREF color);
+    ellipse(HDC hdc, int ID, COLORREF color);
 
     void draw(Point point , Point a ,Point b);
 };
