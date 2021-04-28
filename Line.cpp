@@ -2,9 +2,10 @@
 #include "Clipping.h"
 
 
-Line::Line(HDC hdc, int ID, COLORREF color) :Shape(hdc, ID, color) {
+Line::Line(HDC hdc, int ID, COLORREF color) : Shape(hdc, ID, color) {
 
 }
+
 //using parametric equation
 void Line::parametricLine(Point startPoint, Point endPoint) {
     double dx = (double) endPoint.x - startPoint.x;
@@ -15,7 +16,7 @@ void Line::parametricLine(Point startPoint, Point endPoint) {
         int x = Round(startPoint.x + (t * dx));
         int y = Round(startPoint.y + (t * dy));
 
-        SetPixel(hdc , x , y , color);
+        SetPixel(hdc, x, y, color);
     }
 }
 
@@ -33,11 +34,11 @@ void Line::DDA(Point startPoint, Point endPoint) {
         }
         int x = startPoint.x;
         double y = startPoint.y;
-        SetPixel(hdc , x , Round(y) , color);
+        SetPixel(hdc, x, Round(y), color);
         while (x < endPoint.x) {
             x++;
             y += m;
-            SetPixel(hdc , x , Round(y) , color);
+            SetPixel(hdc, x, Round(y), color);
         }
     } else {
         m = dx / dy;
@@ -50,16 +51,15 @@ void Line::DDA(Point startPoint, Point endPoint) {
         while (y < endPoint.y) {
             y++;
             x += m;
-            SetPixel(hdc , Round(x) , y , color);
+            SetPixel(hdc, Round(x), y, color);
         }
     }
 }
+
 void Line::midpoint(Point startPoint, Point endPoint) {
     double dx = endPoint.x - startPoint.x;
     double dy = endPoint.y - startPoint.y;
     double slope = dy / dx;
-    //if slope is less than or equal to one but greater than zero (0  <= slope <= 1 )
-    // f(x + 1 , y + 0.5)
     if ((abs(dy) <= abs(dx)) && (slope >= 0)) {
         if (startPoint.x > endPoint.x) {
             swap(startPoint.x, endPoint.x);
@@ -81,10 +81,7 @@ void Line::midpoint(Point startPoint, Point endPoint) {
             x++;
             SetPixel(hdc, x, y, color);
         }
-    }
-        //slope greater than one and positive (greater than zero)
-        // f(x + 0.5 , y + 1 )
-    else if ((abs(dy) > abs(dx)) && (slope > 0)) {
+    } else if ((abs(dy) > abs(dx)) && (slope > 0)) {
         if (startPoint.y > endPoint.y) {
             swap(startPoint.x, endPoint.x);
             swap(startPoint.y, endPoint.y);
@@ -105,9 +102,59 @@ void Line::midpoint(Point startPoint, Point endPoint) {
             y++;
             SetPixel(hdc, x, y, color);
         }
+    } else if ((slope < 0) && (abs(dy) <= abs(dx))) {
+        if (startPoint.x > endPoint.x) {
+            swap(startPoint.x, endPoint.x);
+            swap(startPoint.y, endPoint.y);
+        }
+        int x = startPoint.x;
+        int y = startPoint.y;
+        double d = -(endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y);
+        double change1 = -2 * (endPoint.y - startPoint.y);
+        double change2 = -2 * ((endPoint.x - startPoint.x) + (endPoint.y - startPoint.y));
+        SetPixel(hdc, x, y, color);
+        while (x <= endPoint.x) {
+            if (d < 0) {
+                d += change1;
+            } else {
+                y--;
+                d += change2;
+            }
+            x++;
+            SetPixel(hdc, x, y, color);
+        }
+    } else {
+        if (startPoint.y > endPoint.y) {
+            swap(startPoint.x, endPoint.x);
+            swap(startPoint.y, endPoint.y);
+        }
+        int x = startPoint.x;
+        int y = startPoint.y;
+        double d = 2 * (endPoint.x - startPoint.x) + (endPoint.y - startPoint.y);
+        double change1 = 2 * (endPoint.x - startPoint.x);
+        double change2 = 2 * ((endPoint.x - startPoint.x) + (endPoint.y - startPoint.y));
+        SetPixel(hdc, x, y, color);
+        while (y <= endPoint.y) {
+            if (d > 0) {
+                d += change1;
+            } else {
+                d += change2;
+                x--;
+            }
+            y++;
+            SetPixel(hdc, x, y, color);
+
+        }
     }
-    //slope less than or equal one and negative
+
 }
 
+void Line::draw(Point start, Point end) {
+    if (ID == LINE_DDA) {
+        DDA(start, end);
+    } else if (ID == LINE_PARAMETRIC) {
+        parametricLine(start, end);
+    } else midpoint(start, end);
+}
 
 
