@@ -54,6 +54,60 @@ void Line::DDA(Point startPoint, Point endPoint) {
         }
     }
 }
+void Line::midpoint(Point startPoint, Point endPoint) {
+    double dx = endPoint.x - startPoint.x;
+    double dy = endPoint.y - startPoint.y;
+    double slope = dy / dx;
+    //if slope is less than or equal to one but greater than zero (0  <= slope <= 1 )
+    // f(x + 1 , y + 0.5)
+    if ((abs(dy) <= abs(dx)) && (slope >= 0)) {
+        if (startPoint.x > endPoint.x) {
+            swap(startPoint.x, endPoint.x);
+            swap(startPoint.y, endPoint.y);
+        }
+        double d = (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y); // desicion variable
+        double change1 = 2 * (endPoint.x - startPoint.x) - 2 * (endPoint.y - startPoint.y); // under the line
+        double change2 = -2 * (endPoint.y - startPoint.y); //above the line
+        int x = startPoint.x;
+        int y = startPoint.y;
+        SetPixel(hdc, x, y, color);
+        while (x <= endPoint.x) {
+            if (d <= 0) {
+                y++;
+                d += change1;
+            } else {
+                d += change2;
+            }
+            x++;
+            SetPixel(hdc, x, y, color);
+        }
+    }
+        //slope greater than one and positive (greater than zero)
+        // f(x + 0.5 , y + 1 )
+    else if ((abs(dy) > abs(dx)) && (slope > 0)) {
+        if (startPoint.y > endPoint.y) {
+            swap(startPoint.x, endPoint.x);
+            swap(startPoint.y, endPoint.y);
+        }
+        double d = 2 * (endPoint.x - startPoint.x) - (endPoint.y - startPoint.y);
+        double change1 = 2 * (endPoint.x - startPoint.x);
+        double change2 = 2 * ((endPoint.x - startPoint.x) - (endPoint.y - startPoint.y));
+        int x = startPoint.x;
+        int y = startPoint.y;
+        SetPixel(hdc, x, y, color);
+        while (y <= endPoint.y) {
+            if (d < 0) {
+                d += change1;
+            } else {
+                x++;
+                d += change2;
+            }
+            y++;
+            SetPixel(hdc, x, y, color);
+        }
+    }
+    //slope less than or equal one and negative
+}
 
 
 
