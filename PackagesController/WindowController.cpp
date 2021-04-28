@@ -233,6 +233,15 @@ void WindowController::loadingDataHelper() {
     loadData(file_name);
 }
 
+void WindowController::clear(HWND hwnd) {
+    savedData.clear();
+    InvalidateRect(hwnd, NULL, true);
+}
+
+void WindowController::clearClippingWindow() {
+    this->ClippingWindow.clear();
+}
+
 bool WindowController::isCurrentlyLine() {
     return (ID >= 1 && ID <= 3);
 }
