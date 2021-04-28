@@ -10,7 +10,7 @@
 - [x] Draw circles
     - [cartesian equation](https://en.wikipedia.org/wiki/Circle#Cartesian_coordinates)
     - [Polar Equation](https://en.wikipedia.org/wiki/Circle#Polar_coordinates)
-    - Iterative polar <br/>
+    - Iterative polar
     - [Bresenham's mid-point algorithm](https://en.wikipedia.org/wiki/Midpoint_circle_algorithm)
     - Modified Bresenham's mid-point algorithm  
    
