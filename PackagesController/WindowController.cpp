@@ -152,6 +152,87 @@ void WindowController::savingDataHelper() {
     savingData(file_name);
 }
 
+void WindowController::loadData(string name) {
+
+    vector<Point> clippingWindow;
+    string iter;
+    ifstream MyreadFile(name);
+    while (getline(MyreadFile, iter)) {
+        info curr;
+        string temp = "";
+        vector<string> result;
+        for (int i = 0; i < iter.size(); i++) {
+            if (iter[i] == '-') {
+                result.push_back(temp);
+                temp = "";
+            } else temp += iter[i];
+        }
+
+        result.push_back(temp);
+
+        //convert string to int
+        curr.ID = stoi(result[0]);
+        curr.color = stoi(result[1]);
+
+        receiveMenuID(curr.ID);
+        setColor(curr.color);
+
+        int begIdx = 2;
+        if (isFilling())begIdx = 3;
+
+        for (int i = begIdx; i < result.size(); i += 2) {
+            curr.points.push_back({stoi(result[i]), stoi(result[i + 1])});
+        }
+
+        if (isFilling()) {
+            for (int i = 0; i < curr.points.size(); i++) {
+                receivePointForFilling(curr.points[i], stoi(result[2]), false);
+            }
+        } else if (isCurrentlyLine()) {
+            for (int i = 0; i < curr.points.size(); i++) {
+                receivePointForLine(curr.points[i]);
+            }
+        } else if (isCurrentlyCircle()) {
+            for (int i = 0; i < curr.points.size(); i++) {
+                receivePointForCircle(curr.points[i]);
+            }
+        } else if (isClipping()) {
+
+            for (int i = 0; i < curr.points.size(); i++)
+                receivePointForClipping(curr.points[i], clippingWindow);
+
+            if (curr.ID == USE_CLIPPING_WINDOW)
+                clippingWindow.clear(), clippingWindow = curr.points;
+
+        } else if (isCurrentlyEllipse()) {
+            for (int i = 0; i < curr.points.size(); i++) {
+                receivePointForEllipse(curr.points[i]);
+            }
+        }
+    }
+}
+
+void WindowController::loadingDataHelper() {
+
+    savedData.clear();
+
+    OPENFILENAME ofn;
+    char szFileName[MAX_PATH] = "";
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+    ofn.lpstrFile = szFileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+    ofn.lpstrDefExt = "txt";
+
+    GetOpenFileName(&ofn);
+
+    string file_name = ofn.lpstrFile;
+    loadData(file_name);
+}
+
 bool WindowController::isCurrentlyLine() {
     return (ID >= 1 && ID <= 3);
 }
