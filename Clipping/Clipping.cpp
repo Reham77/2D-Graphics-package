@@ -24,3 +24,13 @@ vector<Point> Clipping::drawClippingWindow(Point topLeft, Point bottomRight) {
 
     return clippingWindowPoints;
 }
+
+//clipping window [0] (x left , y top)
+// [1] (x right  , y bottom)
+bool Clipping::clipped(Point point, vector<Point> clippingWindowPoints) {
+    return (point.x >= clippingWindowPoints[0].x &&
+            point.x <= clippingWindowPoints[1].x &&
+            point.y >= clippingWindowPoints[0].y &&
+            point.y <= clippingWindowPoints[1].y);
+
+}
