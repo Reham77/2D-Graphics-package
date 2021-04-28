@@ -17,3 +17,18 @@ void WindowController::SetClippingWindow(vector<Point> Clippingwindow) {
     this->ClippingWindow = Clippingwindow;
 }
 
+void WindowController::doubleClick(Point point) {
+    if (isCurrentlyLine()) {
+        receivePointForLine(point);
+    } else if (isCurrentlyCircle()) {
+        receivePointForCircle(point);
+    } else if (isFilling()) {
+        int option = 0;
+        receivePointForFilling(point, option, true);
+    } else if (isClipping()) {
+        vector<Point> clippingWindow;
+        receivePointForClipping(point, clippingWindow);
+    } else if (isCurrentlyEllipse()) {
+        receivePointForEllipse(point);
+    }
+}
