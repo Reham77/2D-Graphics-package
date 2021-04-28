@@ -1,5 +1,5 @@
-#include "Shape.h"
-#include "Line.h"
+#include "../Shape.h"
+#include "../Line/Line.h"
 
 union OutCode {
     unsigned All: 4;

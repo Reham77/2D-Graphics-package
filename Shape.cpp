@@ -1,5 +1,5 @@
 #include "Shape.h"
-#include "Clipping.h"
+#include "Clipping/Clipping.h"
 
 
 int Shape::Round(double x) {

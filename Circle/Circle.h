@@ -1,8 +1,8 @@
 #ifndef UNTITLED51_CIRCLE_H
 #define UNTITLED51_CIRCLE_H
 
-#include "Shape.h"
-#include "Clipping.h"
+#include "../Shape.h"
+#include "../Clipping/Clipping.h"
 
 using namespace std;
 

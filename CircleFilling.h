@@ -1,5 +1,5 @@
-#include "Circle.h"
-#include "Line.h"
+#include "Circle/Circle.h"
+#include "Line/Line.h"
 
 class CircleFilling : public Shape {
 

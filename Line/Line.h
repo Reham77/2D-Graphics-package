@@ -1,7 +1,7 @@
 #ifndef UNTITLED51_LINE_H
 #define UNTITLED51_LINE_H
 
-#include "Shape.h"
+#include "../Shape.h"
 
 
 using namespace std;

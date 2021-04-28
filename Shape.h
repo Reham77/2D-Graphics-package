@@ -3,7 +3,7 @@
 
 #include "bits/stdc++.h"
 #include "windows.h"
-#include "Point.h"
+#include "Point/Point.h"
 
 using namespace std;
 

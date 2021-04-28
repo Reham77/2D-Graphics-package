@@ -2,7 +2,7 @@
 #define UNTITLED51_ELLIPSE_H
 
 
-#include "Shape.h"
+#include "../Shape.h"
 
 class ellipse : public Shape {
 
