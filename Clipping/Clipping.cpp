@@ -61,3 +61,18 @@ void Clipping::drawClippedCircle(Point center, Point point, vector<Point> clippi
     }
 }
 
+OutCode Clipping::GetOutCode(double x, double y, vector<Point> clippingWindow) {
+    OutCode out;
+    out.All = 0;
+
+    if (x < clippingWindow[0].x)
+        out.left = 1;
+    else if (x > clippingWindow[1].x)
+        out.right = 1;
+    if (y < clippingWindow[0].y)
+        out.top = 1;
+    else if (y > clippingWindow[1].y)
+        out.bottom = 1;
+    return out;
+
+}
