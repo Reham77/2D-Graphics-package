@@ -1,6 +1,6 @@
 #include "CircleFilling.h"
 
-CircleFilling::CircleFilling(HDC hdc, int ID, COLORREF color) : Shape(hdc, ID, color) {
+CircleFilling::CircleFilling(HDC hdc, int ID, COLORREF color): Shape(hdc, ID, color) {
 
 }
 
@@ -53,7 +53,6 @@ void CircleFilling::fillingThirdQuarter(Point center, Point point) {
 }
 
 void CircleFilling::fillingForthQuarter(Point center, Point point) {
-
     int radius = circle.getRadius(center, point);
     int x = radius;
     int y = 0;
@@ -68,3 +67,13 @@ void CircleFilling::fillingForthQuarter(Point center, Point point) {
     }
 }
 
+void CircleFilling::draw(int option, Point center, Point point) {
+
+    if (option == 1) {
+        fillingFirstQuarter(center, point);
+    } else if (option == 2) {
+        fillingSecondQuarter(center, point);
+    } else if (option == 3) {
+        fillingThirdQuarter(center, point);
+    } else fillingForthQuarter(center, point);
+}
